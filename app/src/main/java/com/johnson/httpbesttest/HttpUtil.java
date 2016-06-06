@@ -1,6 +1,8 @@
 package com.johnson.httpbesttest;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -60,6 +62,12 @@ public class HttpUtil {
     }
 
     private static boolean isNetworkAvailable() {
-        return false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) MyApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+        if((networkInfo==null)||(!networkInfo.isAvailable())){
+            return false;
+        }else{
+            return true;
+        }
     }
 }
